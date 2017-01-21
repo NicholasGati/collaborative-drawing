@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
   socket.on('draw_line', (data) => {
     const line = data.line;
     context.beginPath();
-    context.moveTo(line[0].x * width, (line[0].y * height) - 35);
-    context.lineTo(line[1].x * width, (line[1].y * height) - 35);
+    context.moveTo(line[0].x * width, (line[0].y * height) - 50);
+    context.lineTo(line[1].x * width, (line[1].y * height) - 50);
     context.strokeStyle = "#ff0000";
     context.lineWidth = 5;
     context.stroke();
@@ -57,6 +57,21 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(mainLoop, 25);
   }
   mainLoop();
+
+
+  /**
+    * Clear the canvas
+  */
+  document.getElementById('clear-canvas').addEventListener('click', emitClearCanvas, false);
+  function emitClearCanvas() {
+    socket.emit('clear_canvas', { line: null });
+  }
+
+  socket.on('clear_canvas', (data) => {
+    if (data.line == null) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  });
 });
 
 

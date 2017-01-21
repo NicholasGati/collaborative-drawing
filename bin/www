@@ -8,7 +8,7 @@
 const app = require('../app');
 const debug = require('debug')('collab-drawing:server');
 const http = require('http');
-const socketIo = require('socket.io')(8080);
+const socketIo = require('socket.io')(8080); // different port than below
 
 /**
  * Get port from environment and store in Express.
@@ -36,8 +36,9 @@ server.on('listening', onListening);
 */
 
 let line_history = [];
-
+// while connected
 io.on('connection', (socket) => {
+  // on connection, draw the lines that were already there.
   for (let i in line_history) {
     socket.emit('draw_line', { line: line_history[i] });
   }
@@ -45,6 +46,11 @@ io.on('connection', (socket) => {
   socket.on('draw_line', (data) => {
     line_history.push(data.line);
     io.emit('draw_line', { line: data.line });
+  });
+
+  socket.on('clear_canvas', (data) => {
+    line_history.length = 0;
+    io.emit('clear_canvas', { line: data.line });
   });
 });
 
