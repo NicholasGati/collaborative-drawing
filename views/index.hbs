@@ -1,5 +1,29 @@
-<h1>{{ title }}</h1>
+<div class="editor-section">
+  <div class="col-md-12" id="editor-functions">
+    <div class="col-md-4 columns">
+      <ul id="clear-functions">
+        <li><button id="clear-canvas" type="button" name="button">Clear</button></li>
+      </ul>
+    </div>
 
-<button id="clear-canvas" type="button" name="button">Clear</button>
+    <div class="col-md-4 columns">
+      <ul id="line-sizes" class="list-inline text-center">
+        <li id="decrease-font" data-font-size="-2"><img src="images/minus.svg" alt="decrease font size"></li>
+        <li id="increase-font" data-font-size="2"><img src="images/plus.svg" alt="increase font size"></li>
+      </ul>
+    </div>
 
-<canvas id="canvas"></canvas>
+    <div class="col-md-4 columns">
+      <ul id="line-color" class="list-inline text-center">
+        <li class="background-red" id="red"></li>
+        <li class="background-green" id="green"></li>
+        <li class="background-blue" id="blue"></li>
+        <li class="background-purple" id="purple"></li>
+        <li class="background-orange" id="orange"></li>
+        <li class="background-black" id="black"></li>
+      </ul>
+    </div>
+  </div>
+
+  <canvas id="canvas"></canvas>
+</div>

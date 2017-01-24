@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // Get canvas and create context
   const canvas = document.getElementById('canvas');
   const context = canvas.getContext('2d');
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  const width = canvas.parentElement.clientWidth;
+  const height = canvas.parentElement.clientHeight;
   const socket = io.connect();
 
   // Set canvas to full browser width/height
@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", function() {
   canvas.onmouseup = (e) => {
     mouse.click = false;
   }
-
   canvas.onmousemove = (e) => {
     // normalize mouse position 0.0 - 1.0
-    mouse.pos.x = e.clientX / width;
-    mouse.pos.y = e.clientY / height;
+    const rect = canvas.getBoundingClientRect();
+    mouse.pos.x = e.clientX - rect.left;
+    mouse.pos.y = e.clientY - rect.top;
     mouse.move = true;
   }
 
@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", function() {
   socket.on('draw_line', (data) => {
     const line = data.line;
     context.beginPath();
-    context.moveTo(line[0].x * width, (line[0].y * height) - 50);
-    context.lineTo(line[1].x * width, (line[1].y * height) - 50);
-    context.strokeStyle = "#ff0000";
-    context.lineWidth = 5;
+    context.moveTo(line[0].x, line[0].y);
+    context.lineTo(line[1].x, line[1].y);
+    context.strokeStyle = "black";
+    context.lineWidth = 4;
     context.stroke();
   });
 
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
       mouse.move = false;
     }
     mouse.posPrev = { x: mouse.pos.x, y: mouse.pos.y };
-    setTimeout(mainLoop, 25);
+    setTimeout(mainLoop, 50);
   }
   mainLoop();
 
