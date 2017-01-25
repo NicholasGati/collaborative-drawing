@@ -34,7 +34,17 @@ button#clear-canvas {
 }
 
 #line-sizes {
+  display: inline-block;
   margin-top: 10px;
+}
+
+#line-size-display {
+  width: 45px;
+  display: inline-block;
+  background-color: #ffffff;
+  color: #404040;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 #line-sizes li {
@@ -77,11 +87,11 @@ button#clear-canvas {
 /*
 * Colors for editor
 */
-#line-color {
+#line-colors {
   margin-top: 10px;
 }
 
-#line-color li {
+#line-colors li {
   cursor: pointer;
   width: 30px;
   height: 30px;
@@ -92,19 +102,19 @@ button#clear-canvas {
 }
 
 .red {
-  color: rgb(204, 12, 12)
+  color: red;
 }
 
 .background-red {
-  background-color: rgb(204, 12, 12);
+  background-color: red;
 }
 
 .blue {
-  color: rgb(62, 161, 224);
+  color: blue;
 }
 
 .background-blue {
-  background-color: rgb(62, 161, 224);
+  background-color: blue;
 }
 
 .black {
@@ -116,25 +126,25 @@ button#clear-canvas {
 }
 
 .green {
-  color: rgb(46, 179, 39);
+  color: green;
 }
 
 .background-green {
-  background-color: rgb(46, 179, 39);
+  background-color: green;
 }
 
 .orange {
-  color: rgb(255, 138, 0);
+  color: orange;
 }
 
 .background-orange {
-  background-color: rgb(255, 138, 0);
+  background-color: orange;
 }
 
 .purple {
-  color: rgb(84, 61, 150);
+  color: purple;
 }
 
 .background-purple {
-  background-color: rgb(84, 61, 150);
+  background-color: purple;
 }

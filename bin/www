@@ -36,21 +36,40 @@ server.on('listening', onListening);
 */
 
 let line_history = [];
+let line_size = 2;
+let color = 'black';
 // while connected
 io.on('connection', (socket) => {
+  // make sure line size display is current
+  io.emit('update_line_size', { size: line_size });
+
   // on connection, draw the lines that were already there.
   for (let i in line_history) {
-    socket.emit('draw_line', { line: line_history[i] });
+    socket.emit('draw_line', {
+      line: line_history[i].line,
+      size: line_history[i].line_size,
+      color: line_history[i].color
+    });
   }
 
   socket.on('draw_line', (data) => {
-    line_history.push(data.line);
-    io.emit('draw_line', { line: data.line });
+    line_history.push({line: data.line, line_size: line_size, color: color});
+    io.emit('draw_line', { line: data.line, size: line_size, color: color});
   });
 
   socket.on('clear_canvas', (data) => {
     line_history.length = 0;
     io.emit('clear_canvas', { line: data.line });
+  });
+
+  socket.on('change_line_size', (data) => {
+    line_size = Math.max(line_size + parseInt(data.size, 10), 1);
+    io.emit('change_line_size', { size: line_size });
+  });
+
+  socket.on('change_color', (data) => {
+    color = data.color;
+    io.emit('change_color', { color: color });
   });
 });
 
