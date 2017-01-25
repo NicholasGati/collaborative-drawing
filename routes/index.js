@@ -5,7 +5,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Calm Journey - The Collaborative Whiteboard' });
+  res.render('index', { title: 'Collaborative Whiteboard' });
 });
 
 module.exports = router;
